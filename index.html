@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI-Integrated Visible Spectroscopy Device</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" defer></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo" aria-label="Website Logo">
+        <i class="fas fa-microscope" aria-hidden="true"></i> AI-VisSpec
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About Us</a></li>
+        <li><a href="#project" class="nav-link">Project</a></li>
+        <li><a href="#aim" class="nav-link">Aim</a></li>
+        <li><a href="#data" class="nav-link">Data & Prediction</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle Navigation">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="section home-section">
+      <div class="home-content">
+        <h1>AI-Integrated Visible Spectroscopy Device</h1>
+        <p class="tagline">Shining Light on Medicine Integrity</p>
+      </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="section about-section container">
+      <h2>About Us</h2>
+      <div class="team-cards">
+        <div class="card">
+          <i class="fas fa-user-md card-icon" aria-hidden="true"></i>
+          <h3>Dr. Ananya Singh</h3>
+          <p>Project Lead & AI Specialist</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-microscope card-icon" aria-hidden="true"></i>
+          <h3>Rohan Mehta</h3>
+          <p>Hardware Engineer</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-code card-icon" aria-hidden="true"></i>
+          <h3>Priya Sharma</h3>
+          <p>Software Developer</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-flask card-icon" aria-hidden="true"></i>
+          <h3>Dr. Karan Patel</h3>
+          <p>Medical Consultant</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project -->
+    <section id="project" class="section project-section container">
+      <h2>Project</h2>
+      <div class="project-content">
+        <div class="hardware">
+          <h3><i class="fas fa-microchip" aria-hidden="true"></i> Hardware</h3>
+          <ul>
+            <li><strong>RGB LED:</strong> Emits visible light spectrum</li>
+            <li><strong>LDR:</strong> Measures reflected light intensity</li>
+            <li><strong>ESP32:</strong> Microcontroller for data acquisition</li>
+          </ul>
+        </div>
+        <div class="ai-integration">
+          <h3><i class="fas fa-robot" aria-hidden="true"></i> AI Integration</h3>
+          <p>
+            A Python-based AI model processes the RGB data to predict medicine authenticity.
+            It classifies samples as <strong>Genuine</strong> or <strong>Fake</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Aim -->
+    <section id="aim" class="section aim-section container">
+      <h2>Aim</h2>
+      <ul>
+        <li>Ensure medicine integrity and patient safety</li>
+        <li>Leverage spectroscopy + AI for real-time detection</li>
+        <li>Affordable, portable solution for widespread use</li>
+        <li>Raise awareness about counterfeit medicine risks</li>
+      </ul>
+    </section>
+
+    <!-- Data -->
+    <section id="data" class="section data-section container">
+      <h2>Data & Prediction</h2>
+      <div class="data-table-wrapper">
+        <table id="data-table" class="data-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>R</th>
+              <th>G</th>
+              <th>B</th>
+              <th>R/G Ratio</th>
+              <th>G/B Ratio</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="prediction-box" class="prediction-box">
+        <h3>Prediction</h3>
+        <p id="prediction-text">Awaiting Data...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 AI-VisSpec. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
