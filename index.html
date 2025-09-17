@@ -1,145 +1,278 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI-Integrated Visible Spectroscopy Device</title>
+  <title>AI-VisSpec | Dark Medicine Theme</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet" />
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" defer></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* -------- GLOBAL -------- */
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Roboto',sans-serif;color:#eaeaea;background:#0d1b2a;line-height:1.6}
+
+    /* -------- NAVBAR -------- */
+    .nav{background:#1b263b;padding:0.8rem 0;position:sticky;top:0;z-index:1000}
+    .nav .wrap{display:flex;justify-content:space-between;align-items:center;width:90%;margin:auto}
+    .brand{font-family:'Orbitron',sans-serif;font-size:1.4rem;color:#00b4d8;display:flex;align-items:center;gap:0.4rem}
+    .menu{display:flex;gap:1.2rem}
+    .menu a{text-decoration:none;color:#e0e0e0;font-weight:500;transition:all 0.3s ease}
+    .menu a:hover,.menu a.active{color:#00b4d8}
+    .hamb{display:none;background:none;border:0;color:#fff;font-size:1.5rem;cursor:pointer}
+
+    /* -------- HERO -------- */
+    .hero{min-height:80vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(to right,#0a192f,#1b263b);padding:2rem}
+    .hero .inner{display:grid;grid-template-columns:1fr 400px;gap:2rem;max-width:1100px;width:100%}
+    .hero h1{font-size:2.2rem;font-weight:700;color:#90e0ef}
+    .tag{color:#00b4d8;margin-top:0.5rem;font-weight:600}
+    .summary{margin-top:1rem;color:#ccc}
+    .card{background:#1b263b;border-radius:12px;padding:1rem;box-shadow:0 4px 12px rgba(0,0,0,0.6)}
+    .card-sub{color:#aaa;margin-bottom:1rem}
+
+    /* Buttons */
+    .btn{padding:0.7rem 1.2rem;border-radius:8px;border:none;cursor:pointer;font-weight:bold;background:#00b4d8;color:#fff;transition:transform 0.2s ease,background 0.3s ease}
+    .btn:hover{background:#0077b6;transform:translateY(-3px)}
+    .btn.secondary{background:#90e0ef;color:#0a192f}
+    .btn.secondary:hover{background:#48cae4;transform:translateY(-3px)}
+
+    /* -------- SECTIONS -------- */
+    .section{padding:3rem 1rem;max-width:1100px;margin:auto}
+    h2{font-family:'Orbitron',sans-serif;text-align:center;margin-bottom:1.5rem;color:#90e0ef}
+
+    /* Team Cards */
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
+    .card-team{background:#1b263b;padding:1.2rem;border-radius:12px;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,0.6);transition:transform 0.6s ease,opacity 0.6s ease;opacity:0;transform:translateY(20px);cursor:pointer}
+    .card-team.visible{opacity:1;transform:translateY(0)}
+    .card-team:hover{transform:translateY(-5px)}
+    .card-team h3{margin:0.8rem 0 0.4rem;color:#90e0ef}
+    .card-team p{margin:0;color:#aaa}
+    .card-team i{font-size:2rem;color:#00b4d8}
+
+    /* Modal */
+    .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:2000}
+    .modal-content{background:#1b263b;padding:2rem;border-radius:10px;max-width:500px;width:90%;color:#eaeaea;box-shadow:0 8px 20px rgba(0,0,0,0.6);text-align:center}
+    .modal h3{margin-bottom:1rem;color:#00b4d8}
+    .close-btn{margin-top:1rem;background:#00b4d8;color:#fff;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer}
+    .close-btn:hover{background:#0077b6}
+
+    /* Project / Aim */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .box{background:#1b263b;padding:1.2rem;border-radius:10px;color:#eaeaea;border:1px solid #00b4d8}
+
+    /* Data Section */
+    .data-area{display:grid;grid-template-columns:1fr 400px;gap:1.5rem}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse}
+    th,td{border:1px solid #2d3b55;padding:0.6rem;text-align:center}
+    th{background:#0077b6;color:#fff}
+    .prediction{padding:1rem;border-radius:8px;text-align:center;font-weight:bold;color:#eaeaea;background:#1b263b}
+    .prediction .state{margin-top:0.5rem;font-size:1.1rem}
+    .chart-box{background:#1b263b;border-radius:10px;padding:1rem;margin-top:1rem;box-shadow:0 4px 8px rgba(0,0,0,0.6)}
+
+    /* -------- FOOTER -------- */
+    footer{background:#1b263b;color:#ccc;text-align:center;padding:1rem;margin-top:2rem}
+
+    /* -------- RESPONSIVE -------- */
+    @media(max-width:980px){
+      .hero .inner{grid-template-columns:1fr}
+      .data-area{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
+      .menu{display:none;flex-direction:column;background:#1b263b;position:absolute;right:0;top:60px;padding:1rem;border-radius:0 0 8px 8px}
+      .menu.show{display:flex}
+      .hamb{display:block}
+    }
+  </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="container nav-container">
-      <div class="logo" aria-label="Website Logo">
-        <i class="fas fa-microscope" aria-hidden="true"></i> AI-VisSpec
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="wrap">
+      <div class="brand"><i class="fas fa-microscope"></i> AI-VisSpec</div>
+      <div class="menu" id="menu">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#project">Project</a>
+        <a href="#aim">Aim</a>
+        <a href="#data">Data</a>
       </div>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#home" class="nav-link active">Home</a></li>
-        <li><a href="#about" class="nav-link">About Us</a></li>
-        <li><a href="#project" class="nav-link">Project</a></li>
-        <li><a href="#aim" class="nav-link">Aim</a></li>
-        <li><a href="#data" class="nav-link">Data & Prediction</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Toggle Navigation">
-        <i class="fas fa-bars" aria-hidden="true"></i>
-      </button>
+      <button class="hamb" id="hambBtn"><i class="fas fa-bars"></i></button>
     </div>
   </nav>
 
-  <main>
-    <!-- Home Section -->
-    <section id="home" class="section home-section">
-      <div class="home-content">
+  <!-- HERO -->
+  <header id="home" class="hero">
+    <div class="inner">
+      <div>
         <h1>AI-Integrated Visible Spectroscopy Device</h1>
-        <p class="tagline">Shining Light on Medicine Integrity</p>
+        <div class="tag">Shining Light on Medicine Integrity</div>
+        <p class="summary">Portable spectroscopy + lightweight AI to quickly screen medicine authenticity using RGB reflection signatures. Built for field use, low cost, and real-time feedback.</p>
+        <div class="cta">
+          <button class="btn" id="connectBtn">Connect (WebSocket)</button>
+          <button class="btn secondary" id="demoBtn">Simulate Data</button>
+        </div>
       </div>
-    </section>
+      <aside class="card">
+        <h3>Live Preview</h3>
+        <p class="card-sub">Realtime RGB stream & prediction</p>
+        <div id="mini-preview">Waiting for data...</div>
+      </aside>
+    </div>
+  </header>
 
-    <!-- About Us -->
-    <section id="about" class="section about-section container">
+  <!-- MAIN -->
+  <main>
+    <section id="about" class="section">
       <h2>About Us</h2>
-      <div class="team-cards">
-        <div class="card">
-          <i class="fas fa-user-md card-icon" aria-hidden="true"></i>
-          <h3>Debasmin Ghosh</h3>
-          <p>Team Leader</p>
-        </div>
-        <div class="card">
-          <i class="fas fa-microscope card-icon" aria-hidden="true"></i>
-          <h3>Sushoban Roy</h3>
-          <p>Hardware Engineer</p>
-        </div>
-        <div class="card">
-          <i class="fas fa-code card-icon" aria-hidden="true"></i>
-          <h3>Rupsa Saha</h3>
-          <p>Hardware Engineer</p>
-        </div>
-        <div class="card">
-          <i class="fas fa-flask card-icon" aria-hidden="true"></i>
-          <h3>Suchi Bajaj</h3>
-          <p>Hardware Engineer</p>
-        </div>
-      </div>
-      </div>
-        <div class="card">
-          <i class="fas fa-flask card-icon" aria-hidden="true"></i>
-          <h3>Arjun Chakraborti</h3>
-          <p>Hardware Engineer</p>
-        </div>
+      <div class="team-grid">
+        <div class="card-team" data-info="Debasmin Ghosh is now pursuing B.Tech from Heritage Institute of Technology, 3rd Year, Applied Electronics and Instrumentation Engineering."><i class="fas fa-user-md"></i><h3>Debasmin Ghosh</h3><p>Team Leader</p></div>
+        <div class="card-team" data-info="Sushobhan Roy is now pursuing B.Tech from Heritage Institute of Technology, 3rd Year, Applied Electronics and Instrumentation Engineering."><i class="fas fa-microchip"></i><h3>Sushobhan Roy</h3><p>Hardware Engineer</p></div>
+        <div class="card-team" data-info="Rupsa Saha is now pursuing B.Tech from Heritage Institute of Technology, 3rd Year, Applied Electronics and Instrumentation Engineering."><i class="fas fa-code"></i><h3>Rupsa Saha</h3><p>Hardware Engineer</p></div>
+        <div class="card-team" data-info="Suchi Bajaj is now pursuing B.Tech from Heritage Institute of Technology, 3rd Year, Applied Electronics and Instrumentation Engineering."><i class="fas fa-flask"></i><h3>Suchi Bajaj</h3><p>Hardware Engineer</p></div>
+        <div class="card-team" data-info="Arjun Chakraborti is now pursuing B.Tech from Heritage Institute of Technology, 3rd Year, Applied Electronics and Instrumentation Engineering."><i class="fas fa-user-nurse"></i><h3>Arjun Chakraborti</h3><p>Hardware Engineer</p></div>
       </div>
     </section>
 
-    <!-- Project -->
-    <section id="project" class="section project-section container">
+    <section id="project" class="section">
       <h2>Project</h2>
-      <div class="project-content">
-        <div class="hardware">
-          <h3><i class="fas fa-microchip" aria-hidden="true"></i> Hardware</h3>
+      <div class="two-col">
+        <div class="box">
+          <h3>Hardware</h3>
           <ul>
-            <li><strong>RGB LED:</strong> Emits visible light spectrum</li>
-            <li><strong>LDR:</strong> Measures reflected light intensity</li>
-            <li><strong>ESP32:</strong> Microcontroller for data acquisition</li>
+            <li><strong>RGB LED</strong> — controllable visible illumination</li>
+            <li><strong>LDR / Photodiode</strong> — measures reflected intensity</li>
+            <li><strong>ESP32</strong> — collects, preprocesses, and streams data</li>
           </ul>
         </div>
-        <div class="ai-integration">
-          <h3><i class="fas fa-robot" aria-hidden="true"></i> AI Integration</h3>
-          <p>
-            A Python-based AI model processes the RGB data to predict medicine authenticity.
-            It classifies samples as <strong>Genuine</strong> or <strong>Fake</strong>.
-          </p>
+        <div class="box">
+          <h3>AI Integration</h3>
+          <p>A lightweight AI model ingests normalized RGB features and outputs a classification & confidence score.</p>
         </div>
       </div>
     </section>
 
-    <!-- Aim -->
-    <section id="aim" class="section aim-section container">
+    <section id="aim" class="section">
       <h2>Aim</h2>
       <ul>
         <li>Ensure medicine integrity and patient safety</li>
-        <li>Leverage spectroscopy + AI for real-time detection</li>
-        <li>Affordable, portable solution for widespread use</li>
-        <li>Raise awareness about counterfeit medicine risks</li>
+        <li>Leverage spectroscopy + AI for near-instant detection</li>
+        <li>Portable, affordable, and easy-to-use device</li>
+        <li>Provide clear actionable feedback for non-experts</li>
       </ul>
     </section>
 
-    <!-- Data -->
-    <section id="data" class="section data-section container">
+    <section id="data" class="section">
       <h2>Data & Prediction</h2>
-      <div class="data-table-wrapper">
-        <table id="data-table" class="data-table">
-          <thead>
-            <tr>
-              <th>Timestamp</th>
-              <th>R</th>
-              <th>G</th>
-              <th>B</th>
-              <th>R/G Ratio</th>
-              <th>G/B Ratio</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div id="prediction-box" class="prediction-box">
-        <h3>Prediction</h3>
-        <p id="prediction-text">Awaiting Data...</p>
+      <div class="data-area">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Time</th><th>R</th><th>G</th><th>B</th><th>R/G</th><th>G/B</th></tr>
+            </thead>
+            <tbody id="dataBody"></tbody>
+          </table>
+        </div>
+        <div>
+          <div class="prediction" id="predictionBox">
+            <div class="label">Prediction</div>
+            <div class="state" id="predictionState">Awaiting Data...</div>
+            <div id="confidence"></div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>© 2025 AI-VisSpec. All rights reserved.</p>
+  <!-- FOOTER -->
+  <footer>
+    © 2025 AI-VisSpec — Dark Medicine Theme | Deployment Ready
   </footer>
 
-  <script src="script.js"></script>
+  <!-- MODAL -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h3 id="modalName"></h3>
+      <p id="modalInfo"></p>
+      <button class="close-btn" id="closeModal">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // ---------- MOBILE MENU ----------
+    const hambBtn=document.getElementById("hambBtn");
+    const menu=document.getElementById("menu");
+    hambBtn.addEventListener("click",()=>menu.classList.toggle("show"));
+
+    // ---------- SCROLL SPY ----------
+    const sections=document.querySelectorAll("main section, header");
+    const navLinks=document.querySelectorAll(".menu a");
+    window.addEventListener("scroll",()=>{
+      let current="home";const offset=window.innerHeight*0.25;
+      sections.forEach(sec=>{if(scrollY+offset>=sec.offsetTop){current=sec.getAttribute("id")||"home"}});
+      navLinks.forEach(l=>{l.classList.remove("active");if(l.getAttribute("href")==="#"+current){l.classList.add("active")}})
+    });
+
+    // ---------- TEAM CARDS REVEAL ----------
+    const teamCards=document.querySelectorAll(".card-team");
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible")}})
+    },{threshold:0.2});
+    teamCards.forEach(c=>observer.observe(c));
+
+    // ---------- TEAM MODAL ----------
+    const modal=document.getElementById("modal");
+    const modalName=document.getElementById("modalName");
+    const modalInfo=document.getElementById("modalInfo");
+    const closeModal=document.getElementById("closeModal");
+
+    teamCards.forEach(card=>{
+      card.addEventListener("click",()=>{
+        modalName.textContent=card.querySelector("h3").textContent;
+        modalInfo.textContent=card.getAttribute("data-info");
+        modal.style.display="flex";
+      })
+    });
+    closeModal.addEventListener("click",()=>modal.style.display="none");
+    window.addEventListener("click",(e)=>{if(e.target===modal)modal.style.display="none"});
+
+    // ---------- SIMULATE DATA ----------
+    const dataBody=document.getElementById("dataBody");
+    const predictionState=document.getElementById("predictionState");
+    const confidenceBox=document.getElementById("confidence");
+    const miniPreview=document.getElementById("mini-preview");
+
+    function generateData(){
+      const r=Math.floor(Math.random()*255);
+      const g=Math.floor(Math.random()*255);
+      const b=Math.floor(Math.random()*255);
+      const rgr=(r/(g||1)).toFixed(2);
+      const gbr=(g/(b||1)).toFixed(2);
+      const row=`<tr><td>${new Date().toLocaleTimeString()}</td><td>${r}</td><td>${g}</td><td>${b}</td><td>${rgr}</td><td>${gbr}</td></tr>`;
+      dataBody.insertAdjacentHTML("afterbegin",row);
+      while(dataBody.children.length>20)dataBody.removeChild(dataBody.lastChild);
+
+      // prediction logic
+      const prediction=rgr>1.2&&gbr>1.1?"Genuine":"Fake";
+      const confidence=Math.min(0.99,Math.abs((r+g+b)/765)).toFixed(2);
+      predictionState.textContent=prediction;
+      confidenceBox.textContent=`Confidence: ${confidence}`;
+      const box=document.getElementById("predictionBox");
+      if(prediction==="Genuine"){box.style.background="#144d4d"}else{box.style.background="#4d1b1b"}
+      miniPreview.textContent=`R:${r} G:${g} B:${b}`;
+    }
+
+    // ---------- SIMULATE BUTTON ----------
+    const demoBtn=document.getElementById("demoBtn");
+    let simInterval=null;
+    demoBtn.addEventListener("click",()=>{
+      if(simInterval){clearInterval(simInterval);simInterval=null;demoBtn.textContent="Simulate Data"}
+      else{demoBtn.textContent="Stop Simulation";generateData();simInterval=setInterval(generateData,2500)}
+    });
+  </script>
 </body>
 </html>
-
